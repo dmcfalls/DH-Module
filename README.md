@@ -8,6 +8,8 @@ I hope to eventually evolve this C++ prototype into a far more powerful web vers
 Find a sample output of my simple test program in <code>sample-output.txt</code>.
 
 Things I'm hoping to add/change as I continue to develop:
--Sentence level processing
--Paragraph level processing
--Option to query on n-grams in text-level and section-level scopes
+<ul>
+<li>Sentence level processing</li>
+<li>Paragraph level processing</li>
+<li>Option to query on n-grams in text-level and section-level</li>
+<ul>
