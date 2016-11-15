@@ -1,0 +1,148 @@
+Overview: 
+
+Most frequent words: 
+  the: 4352
+  i: 3361
+  and: 3019
+  to: 2607
+  you: 2407
+  a: 1791
+  said: 1678
+  it: 1534
+  he: 1317
+  of: 1246
+  in: 1153
+  she: 1089
+  on: 944
+  that: 927
+  her: 875
+  was: 841
+  says: 831
+  me: 728
+  him: 635
+  at: 584
+  up: 564
+  with: 557
+  my: 537
+  all: 510
+  his: 508
+  then: 506
+  have: 496
+  they: 487
+  for: 473
+  out: 469
+  like: 465
+  dilsey: 449
+  went: 439
+  not: 427
+  do: 415
+  dont: 408
+  what: 392
+  we: 391
+  but: 385
+  now: 380
+  got: 374
+  be: 372
+  them: 370
+  if: 362
+  go: 359
+  back: 357
+  caddy: 339
+  there: 337
+  know: 334
+  jason: 326
+Total words: 96663
+Unique words: 6074
+Average word length: 3.91038
+
+Section Anaylsis: 
+
+Sections:
+  CHAPTER1
+  CHAPTER2
+  CHAPTER3
+  CHAPTER4
+Most frequent words in CHAPTER1: 
+  said: 907
+  the: 860
+  and: 681
+  you: 680
+  to: 592
+  i: 571
+  it: 333
+  he: 310
+  caddy: 280
+  on: 247
+  in: 239
+  him: 219
+  we: 198
+  was: 193
+  she: 192
+  dilsey: 191
+  me: 184
+  up: 170
+  a: 165
+  went: 160
+Most frequent words in CHAPTER2: 
+  the: 1796
+  i: 1048
+  and: 1005
+  a: 708
+  you: 662
+  to: 643
+  it: 529
+  of: 521
+  in: 408
+  he: 368
+  said: 344
+  was: 343
+  that: 321
+  on: 302
+  my: 258
+  her: 248
+  me: 238
+  she: 235
+  at: 223
+  then: 204
+Most frequent words in CHAPTER3: 
+  i: 1474
+  to: 988
+  says: 813
+  the: 804
+  and: 737
+  you: 728
+  a: 588
+  it: 506
+  she: 448
+  that: 344
+  her: 341
+  of: 325
+  in: 293
+  he: 252
+  on: 250
+  me: 241
+  have: 219
+  was: 201
+  all: 188
+  if: 171
+Most frequent words in CHAPTER4: 
+  the: 892
+  and: 596
+  said: 388
+  he: 387
+  to: 384
+  you: 337
+  a: 330
+  of: 273
+  i: 268
+  she: 214
+  in: 213
+  his: 177
+  dilsey: 175
+  it: 166
+  her: 153
+  de: 148
+  him: 146
+  on: 145
+  luster: 133
+  with: 121
