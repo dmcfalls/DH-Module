@@ -5,4 +5,9 @@ I began developing this project to build a tool to help me read Faulkner's <i>Th
 
 I hope to eventually evolve this C++ prototype into a far more powerful web version with the hopes of building a comprehensive online text with which to read Faulkner and others with all the brute-force data within easy reach, ideally with a nicer interface.
 
-Find a sample output of my simple test program in "sample-output.txt".
+Find a sample output of my simple test program in <code>sample-output.txt</code>.
+
+Things I'm hoping to add/change as I continue to develop:
+-Sentence level processing
+-Paragraph level processing
+-Option to query on n-grams in text-level and section-level scopes
