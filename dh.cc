@@ -20,23 +20,27 @@ using namespace std;
 
 const static string kDefaultSection = "";
 const static string kSectionHeader = "*BEGINSECTION_";
-const static size_t kSectionHeaderLen = 14;
+const static size_t kSectionHeaderLen = kSectionHeader.length();
 
+/* Default Constructor */
 DHModule::DHModule() {
   wordCount = 0;
   totalChars = 0;
 }
 
+/* Constructor */
 DHModule::DHModule(const string& filename) {
   wordCount = 0;
   totalChars = 0;
   readTextFromFilename(filename);
 }
 
+/* Destructor */
 DHModule::~DHModule() {
     //Do nothing (yet, at least)
 }
 
+/* Populates all the data structures given a primary text file name */
 void DHModule::readTextFromFilename(const string& filename) {
   ifstream textFile;
   textFile.open(filename);
@@ -94,14 +98,17 @@ void DHModule::readTextFromFilename(const string& filename) {
   textFile.close();
 }
 
+/* Returns the total word count for the text */
 int DHModule::getWordCount() {
   return wordCount;
 }
 
+/* Returns the number of unique words used in the text */
 int DHModule::getUniqueWordCount() {
   return uniqueWords.size();
 }
 
+/* Returns all section names (these are usually hard-coded by the user */
 vector<string> DHModule::getSectionNames() {
   vector<string> results;
   for(auto section = sectionDataModules.begin(); section != sectionDataModules.end(); section++) {
@@ -111,11 +118,13 @@ vector<string> DHModule::getSectionNames() {
   return results;
 }
 
+/* Returns the average length over all words in the text */
 float DHModule::getAverageWordLength() {
   float result = (float)totalChars / wordCount;
   return result;
 }
 
+/* Returns the n most frequently used words in the text where n = numResults */
 vector<string> DHModule::getMostFrequentWords(size_t numResults) {
   vector<string> freqsInOrder;
   string word, freq;
@@ -131,6 +140,7 @@ vector<string> DHModule::getMostFrequentWords(size_t numResults) {
   return mostFrequent;
 }
 
+/* Returns the n most frequently used words from the given section */
 vector<string> DHModule::getMostFrequentWordsFromSection(size_t numResults, string sectionName) {
   vector<string> freqsInOrder;
   string word, freq;
@@ -150,6 +160,7 @@ vector<string> DHModule::getMostFrequentWordsFromSection(size_t numResults, stri
   /*** Private Helper Methods ***/
   /******************************/
 
+/* Strips words of non-alphabet characters and makes them all lower-case */
 void DHModule::stripAndClean(string& word) {
   for(size_t i = 0; i < word.length(); i++) {
     if(!isalpha(word[i])) {
@@ -160,6 +171,7 @@ void DHModule::stripAndClean(string& word) {
   }
 }
 
+/* Returns true if the given word is a special string to mark the beginning of a section */
 bool DHModule::isSectionMarker(string& word) {
   return (word.length() >= kSectionHeaderLen) && (word.substr(0, kSectionHeaderLen) == kSectionHeader);
 }
