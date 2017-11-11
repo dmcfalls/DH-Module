@@ -3,7 +3,6 @@
  * Defines a digital humanities text analysis object. Initialized wih a filename containing a text
  * and allows queries for information about the text.
  * TODO: Implement sentence-level processing.
- * TODO: Add simple part-of-speech analysis.
  */
 
 #include <iostream>
