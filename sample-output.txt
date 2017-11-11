@@ -146,3 +146,40 @@ Most frequent words in CHAPTER4:
   on: 145
   luster: 133
   with: 121
+
+Parts of Speech Analysis: 
+
+Total number of nouns: 46841
+Total number of verbs: 6907
+Total number of adjectivs: 4060
+Total number of adverbs: 8240
+Total number of other words: 30615
+
+In section CHAPTER1:
+  Number of nouns: 10603
+  Number of verbs: 1484
+  Number of adjectivs: 600
+  Number of adverbs: 1471
+  Number of other words: 6273
+
+In section CHAPTER2:
+  Number of nouns: 15063
+  Number of verbs: 2352
+  Number of adjectivs: 1583
+  Number of adverbs: 3231
+  Number of other words: 9691
+
+In section CHAPTER3:
+  Number of nouns: 13298
+  Number of verbs: 1944
+  Number of adjectivs: 1078
+  Number of adverbs: 2015
+  Number of other words: 8997
+
+In section CHAPTER4:
+  Number of nouns: 7877
+  Number of verbs: 1127
+  Number of adjectivs: 799
+  Number of adverbs: 1523
+  Number of other words: 5653
+
