@@ -17,4 +17,6 @@ dh.o: dh.cc dh.h
 	$(CC) $(CFLAGS) dh.cc
 
 clean:
-	rm *.o dh_test
+	rm -f dh_test core *.o
+
+.PHONY: clean all

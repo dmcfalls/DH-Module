@@ -12,7 +12,13 @@
 #include <map>
 #include <vector>
 
-//TODO: add enum to associate an integer with a part of speech (to remove messiness)
+enum part_of_speech_t {
+  noun = 0,
+  verb = 1,
+  adjective = 2,
+  adverb = 3,
+  other = 4
+};
 
 typedef struct sectionData {
   //Same function as the overall uniqueWords and wordFreqs maps, just for individual chapters
@@ -21,8 +27,8 @@ typedef struct sectionData {
   //Both of these map "words of length _" : "number of times words of length _ appears"
   //std::map<int, int> sentenceLengths; (not yet implemented)
   std::map<int, int> wordLengths;
-  //Parts of speech in section
-  //TODO: add
+  //Total number of words of each part of speech that appear (maps part_of_speech_t : count)
+  std::map<part_of_speech_t, int> wordPosKinds;
   //Total number of words in the section
   int wordCount;
 } sectionData;
@@ -45,17 +51,21 @@ class DHModule {
 
     std::vector<std::string> getSectionNames();
 
+    //These methods provide information about parts of speech
+    int getTotalNumPartOfSpeech(part_of_speech_t kind);
+    int getNumPartOfSpeechFromSection(part_of_speech_t kind, std::string& sectionName);
+
     //Computes average values from the database
     float getAverageWordLength();
-    //int getAverageSentenceLength(); (not yet implemented)
+    //float getAverageSentenceLength(); (not yet implemented)
 
     //Does the same as above, except on the section level
-    float getAverageWordLengthFromSection(std::string sectionName);
-    //int getAverageSentenceLengthFromSection(std::string sectionName); (not yet implemented)
+    float getAverageWordLengthFromSection(std::string& sectionName);
+    //float getAverageSentenceLengthFromSection(std::string sectionName); (not yet implemented)
 
     //Gets a list of the most frequent words and their frequencies from the text 
     std::vector<std::string> getMostFrequentWords(size_t numResults);
-    std::vector<std::string> getMostFrequentWordsFromSection(size_t numResults, std::string sectionName);
+    std::vector<std::string> getMostFrequentWordsFromSection(size_t numResults, std::string& sectionName);
 
   private:
     int wordCount;
@@ -81,5 +91,7 @@ class DHModule {
     //Helper methods
     void stripAndClean(std::string& word);
     void populatePartsOfSpeechSets();
+    void initializePartsOfSpeechMap(std::string& sectionName);
+    part_of_speech_t partOfSpeechOf(std::string& word);
     bool isSectionMarker(std::string& word);
 };

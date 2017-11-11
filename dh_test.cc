@@ -36,5 +36,25 @@ int main(int argc, char* argv[]) {
       cout << "  " << mostFreqSec[i] << endl;
     }
   }
+  cout << endl;
+
+  cout << "Parts of Speech Analysis: " << endl << endl;
+  cout << "Total number of nouns: " << faulknerStats.getTotalNumPartOfSpeech(noun) << endl;
+  cout << "Total number of verbs: " << faulknerStats.getTotalNumPartOfSpeech(verb) << endl;
+  cout << "Total number of adjectivs: " << faulknerStats.getTotalNumPartOfSpeech(adjective) << endl;
+  cout << "Total number of adverbs: " << faulknerStats.getTotalNumPartOfSpeech(adverb) << endl;
+  cout << "Total number of other words: " << faulknerStats.getTotalNumPartOfSpeech(other) << endl;
+  cout << endl;
+
+  for (string sectionName : sectionNames) {
+    cout << "In section " << sectionName << ":" << endl;
+    cout << "  Number of nouns: " << faulknerStats.getNumPartOfSpeechFromSection(noun, sectionName) << endl;
+    cout << "  Number of verbs: " << faulknerStats.getNumPartOfSpeechFromSection(verb, sectionName) << endl;
+    cout << "  Number of adjectivs: " << faulknerStats.getNumPartOfSpeechFromSection(adjective, sectionName) << endl;
+    cout << "  Number of adverbs: " << faulknerStats.getNumPartOfSpeechFromSection(adverb, sectionName) << endl;
+    cout << "  Number of other words: " << faulknerStats.getNumPartOfSpeechFromSection(other, sectionName) << endl;
+    cout << endl;
+  }
+
   return 0;
 }
