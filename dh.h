@@ -3,6 +3,7 @@
  * Defines a digital humanities text analysis object. Initialized wih a filename containing a text
  * and allows queries for information about the text.
  * TODO: Implement sentence-level processing.
+ * TODO: Add simple part-of-speech analysis.
  */
 
 #include <iostream>
@@ -11,6 +12,8 @@
 #include <map>
 #include <vector>
 
+//TODO: add enum to associate an integer with a part of speech (to remove messiness)
+
 typedef struct sectionData {
   //Same function as the overall uniqueWords and wordFreqs maps, just for individual chapters
   std::map<std::string, int> uniqueWords;
@@ -18,6 +21,9 @@ typedef struct sectionData {
   //Both of these map "words of length _" : "number of times words of length _ appears"
   //std::map<int, int> sentenceLengths; (not yet implemented)
   std::map<int, int> wordLengths;
+  //Parts of speech in section
+  //TODO: add
+  //Total number of words in the section
   int wordCount;
 } sectionData;
 
@@ -66,7 +72,14 @@ class DHModule {
     //Maps the name of a section to its sectionData
     std::map<std::string, sectionData> sectionDataModules;
 
+    //Collections of parts of speech (nouns, verbs, adjectives, adverbs)
+    std::set<std::string> english_nouns;
+    std::set<std::string> english_verbs;
+    std::set<std::string> english_adjectives;
+    std::set<std::string> english_adverbs;
+
     //Helper methods
     void stripAndClean(std::string& word);
+    void populatePartsOfSpeechSets();
     bool isSectionMarker(std::string& word);
 };

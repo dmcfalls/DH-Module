@@ -22,16 +22,25 @@ const static string kDefaultSection = "";
 const static string kSectionHeader = "*BEGINSECTION_";
 const static size_t kSectionHeaderLen = kSectionHeader.length();
 
+const string kPartsOfSpeechDir = "parts_of_speech";
+const string kNounsPath = "nouns.txt";
+const string kVerbsPath = "verbs.txt";
+const string kAdjectivesPath = "adjectives.txt";
+const string kAdverbsPath = "adverbs.txt";
+const string kPartsOfSpeechFilenames[4] = {kNounsPath, kVerbsPath, kAdjectivesPath, kAdverbsPath};
+
 /* Default Constructor */
 DHModule::DHModule() {
   wordCount = 0;
   totalChars = 0;
+  populatePartsOfSpeechSets();
 }
 
 /* Constructor */
 DHModule::DHModule(const string& filename) {
   wordCount = 0;
   totalChars = 0;
+  populatePartsOfSpeechSets();
   readTextFromFilename(filename);
 }
 
@@ -168,6 +177,31 @@ void DHModule::stripAndClean(string& word) {
     } else {
       word[i] = tolower(word[i]);
     }
+  }
+}
+
+/* Populates parts of speech maps with their respective lists of words */
+void DHModule::populatePartsOfSpeechSets() {
+  for(size_t i = 0; i < 4; i++) {
+    string path = kPartsOfSpeechDir + "/" + kPartsOfSpeechFilenames[i];
+    ifstream stream;
+    string word;
+    stream.open(path);
+
+    while(getline(stream, word)) {
+      stripAndClean(word);
+      if (i == 0) {
+        english_nouns.insert(word);
+      } else if (i == 1) {
+        english_verbs.insert(word);
+      } else if (i == 2) {
+        english_adjectives.insert(word);
+      } else {
+        english_adverbs.insert(word);
+      }
+    }
+
+    stream.close();
   }
 }
 
