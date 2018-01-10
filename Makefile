@@ -3,7 +3,7 @@
 
 CC = g++
 
-CFLAGS = -c -std=c++11 -O0 -Wall -pedantic
+CFLAGS = -c -std=c++11 -O3 -Wall -pedantic
 
 all: dh_test
 

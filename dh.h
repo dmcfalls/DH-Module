@@ -2,7 +2,6 @@
  * ----------
  * Defines a digital humanities text analysis object. Initialized wih a filename containing a text
  * and allows queries for information about the text.
- * TODO: Implement sentence-level processing.
  */
 
 #include <iostream>
@@ -23,8 +22,8 @@ typedef struct sectionData {
   //Same function as the overall uniqueWords and wordFreqs maps, just for individual chapters
   std::map<std::string, int> uniqueWords;
   std::map<int, std::string> wordFreqs;
-  //Both of these map "words of length _" : "number of times words of length _ appears"
-  //std::map<int, int> sentenceLengths; (not yet implemented)
+  //Both of these map "item of length _" : "number of times item of length _ appears" - words measured in characters, sentences in words
+  std::map<int, int> sentenceLengths;
   std::map<int, int> wordLengths;
   //Total number of words of each part of speech that appear (maps part_of_speech_t : count)
   std::map<part_of_speech_t, int> wordPosKinds;
@@ -56,11 +55,11 @@ class DHModule {
 
     //Computes average values from the database
     float getAverageWordLength();
-    //float getAverageSentenceLength(); (not yet implemented)
+    float getAverageSentenceLength();
 
     //Does the same as above, except on the section level
-    float getAverageWordLengthFromSection(std::string& sectionName);
-    //float getAverageSentenceLengthFromSection(std::string sectionName); (not yet implemented)
+    float getAverageWordLengthFromSection(const std::string& sectionName);
+    float getAverageSentenceLengthFromSection(const std::string& sectionName);
 
     //Gets a list of the most frequent words and their frequencies from the text 
     std::vector<std::string> getMostFrequentWords(size_t numResults);

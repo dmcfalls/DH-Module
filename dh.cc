@@ -32,16 +32,6 @@ const string kAdjectivesPath = "adjectives.txt";
 const string kAdverbsPath = "adverbs.txt";
 const string kPartsOfSpeechFilenames[kNumPartsOfSpeech] = {kNounsPath, kVerbsPath, kAdjectivesPath, kAdverbsPath};
 
-/* (repeated from dh.h for convenience)
-enum part_of_speech_t {
-  noun = 0,
-  verb = 1,
-  adjective = 2,
-  adverb = 3,
-  other = 4
-};
-*/
-
 /* Default Constructor */
 DHModule::DHModule() {
   wordCount = 0;
@@ -163,6 +153,33 @@ int DHModule::getNumPartOfSpeechFromSection(part_of_speech_t kind, string& secti
 float DHModule::getAverageWordLength() {
   float result = (float)totalChars / wordCount;
   return result;
+}
+
+float DHModule::getAverageSentenceLength() {
+  float sectionSum = 0;
+  int numSections = 0;
+  for(auto section = sectionDataModules.begin(); section != sectionDataModules.end(); section++) {
+    sectionSum += getAverageSentenceLengthFromSection(section->first);
+    numSections++;
+  }
+  return sectionSum / numSections;
+}
+
+float DHModule::getAverageWordLengthFromSection(const string& sectionName) {
+  int wordsInSection = 0;
+  int charsInSection = 0;
+  auto section = sectionDataModules.find(sectionName);
+  if(section == sectionDataModules.end()) throw ("Error: incorrect sectionName passed to getAverageWordLengthFromSection");
+  for(auto kv = section->second.wordLengths.begin(); kv != section->second.wordLengths.end(); kv++) {
+    wordsInSection += kv->second;
+    charsInSection += kv->second * kv->first;
+  }
+  return (float)charsInSection / wordsInSection;
+}
+
+float DHModule::getAverageSentenceLengthFromSection(const string& sectionName) {
+  //TODO: implement
+  return 0.0;
 }
 
 /* Returns the n most frequently used words in the text where n = numResults */

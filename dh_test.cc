@@ -30,13 +30,14 @@ int main(int argc, char* argv[]) {
     cout << "  " << sectionName << endl;
   }
   for (string sectionName : sectionNames) {
+    cout << "Average word length in " << sectionName << ": " << faulknerStats.getAverageWordLengthFromSection(sectionName) << endl;
     cout << "Most frequent words in " << sectionName << ": " << endl;
     vector<string> mostFreqSec = faulknerStats.getMostFrequentWordsFromSection(kNumFreqWordsSec, sectionName);
     for(size_t i = 0; i < mostFreqSec.size(); i++) {
       cout << "  " << mostFreqSec[i] << endl;
     }
   }
-  cout << endl;
+  cout << endl << endl;
 
   cout << "Parts of Speech Analysis: " << endl << endl;
   cout << "Total number of nouns: " << faulknerStats.getTotalNumPartOfSpeech(noun) << endl;
