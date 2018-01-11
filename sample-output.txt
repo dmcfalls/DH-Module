@@ -52,8 +52,10 @@ Most frequent words:
   know: 334
   jason: 326
 Total words: 96663
+Total sentences: 6346
 Unique words: 6074
-Average word length: 3.91038
+Average word length: 3.91 characters
+Average sentence length: 13.81 words
 
 Section Anaylsis: 
 
@@ -62,6 +64,9 @@ Sections:
   CHAPTER2
   CHAPTER3
   CHAPTER4
+
+Average word length in CHAPTER1: 3.82 characters
+Average sentence length in CHAPTER1: 11.04 words
 Most frequent words in CHAPTER1: 
   said: 907
   the: 860
@@ -83,6 +88,9 @@ Most frequent words in CHAPTER1:
   up: 170
   a: 165
   went: 160
+
+Average word length in CHAPTER2: 4.03 characters
+Average sentence length in CHAPTER2: 18.18 words
 Most frequent words in CHAPTER2: 
   the: 1796
   i: 1048
@@ -104,6 +112,9 @@ Most frequent words in CHAPTER2:
   she: 235
   at: 223
   then: 204
+
+Average word length in CHAPTER3: 3.74 characters
+Average sentence length in CHAPTER3: 19.64 words
 Most frequent words in CHAPTER3: 
   i: 1474
   to: 988
@@ -125,6 +136,9 @@ Most frequent words in CHAPTER3:
   was: 201
   all: 188
   if: 171
+
+Average word length in CHAPTER4: 4.07 characters
+Average sentence length in CHAPTER4: 18.20 words
 Most frequent words in CHAPTER4: 
   the: 892
   and: 596
@@ -146,6 +160,7 @@ Most frequent words in CHAPTER4:
   on: 145
   luster: 133
   with: 121
+
 
 Parts of Speech Analysis: 
 

@@ -1,5 +1,6 @@
 /* File: dh.h
- * ----------
+ * Author: Dan McFalls (dmcfalls@stanford.edu)
+ * -------------------------------------------
  * Defines a digital humanities text analysis object. Initialized wih a filename containing a text
  * and allows queries for information about the text.
  */
@@ -28,7 +29,8 @@ typedef struct sectionData {
   //Total number of words of each part of speech that appear (maps part_of_speech_t : count)
   std::map<part_of_speech_t, int> wordPosKinds;
   //Total number of words in the section
-  int wordCount;
+  int wordCount = 0;
+  int sentenceCount = 0;
 } sectionData;
 
 class DHModule {
@@ -47,9 +49,13 @@ class DHModule {
     int getWordCount();
     int getUniqueWordCount();
 
+    //Returns sentence count over the entire text
+    int getSentenceCount();
+
+    //Returns the names of the (user-annotated) sections of the text
     std::vector<std::string> getSectionNames();
 
-    //These methods provide information about parts of speech
+    //These methods provide information about parts of speech (numbers are rough estimates only)
     int getTotalNumPartOfSpeech(part_of_speech_t kind);
     int getNumPartOfSpeechFromSection(part_of_speech_t kind, std::string& sectionName);
 
@@ -67,6 +73,7 @@ class DHModule {
 
   private:
     int wordCount;
+    int sentenceCount;
     int totalChars;
 
     //Store the unique words in the text mapped to their frequenceis and vice-versa
@@ -92,4 +99,5 @@ class DHModule {
     void initializePartsOfSpeechMap(std::string& sectionName);
     part_of_speech_t partOfSpeechOf(std::string& word);
     bool isSectionMarker(std::string& word);
+    bool endsSentence(std::string& word);
 };

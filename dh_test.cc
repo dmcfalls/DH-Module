@@ -1,6 +1,14 @@
+/* File: dh_test.cc
+ * Author: Dan McFalls (dmcfalls@stanford.edu)
+ * -------------------------------------------
+ * Test file for the DH-Module class, using Faulkner's The Sound and the Fury
+ * as an example text. Tests all class methods and reports the results by section.
+ */
+
 #include "dh.h"
 #include <string>
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -10,6 +18,9 @@ const int kNumFreqWordsSec = 20;
 
 int main(int argc, char* argv[]) {
   DHModule faulknerStats = DHModule(kFilename);
+  cout << fixed;
+  cout << setprecision(2);
+
   cout << "Overview: " << endl;
   cout << endl;
   vector<string> mostFreq = faulknerStats.getMostFrequentWords(kNumFreqWords);
@@ -18,8 +29,10 @@ int main(int argc, char* argv[]) {
     cout << "  " << mostFreq[i] << endl;
   }
   cout << "Total words: " << faulknerStats.getWordCount() << endl;
+  cout << "Total sentences: " << faulknerStats.getSentenceCount() << endl;
   cout << "Unique words: " << faulknerStats.getUniqueWordCount() << endl;
-  cout << "Average word length: " << faulknerStats.getAverageWordLength() << endl;
+  cout << "Average word length: " << faulknerStats.getAverageWordLength() << " characters" << endl;
+  cout << "Average sentence length: " << faulknerStats.getAverageSentenceLength() << " words" << endl;
   cout << endl;
 
   cout << "Section Anaylsis: " << endl;
@@ -29,15 +42,18 @@ int main(int argc, char* argv[]) {
   for(string sectionName : sectionNames) {
     cout << "  " << sectionName << endl;
   }
+  cout << endl;
   for (string sectionName : sectionNames) {
-    cout << "Average word length in " << sectionName << ": " << faulknerStats.getAverageWordLengthFromSection(sectionName) << endl;
+    cout << "Average word length in " << sectionName << ": " << faulknerStats.getAverageWordLengthFromSection(sectionName) << " characters" << endl;
+    cout << "Average sentence length in " << sectionName << ": " << faulknerStats.getAverageSentenceLengthFromSection(sectionName) << " words" << endl;
     cout << "Most frequent words in " << sectionName << ": " << endl;
     vector<string> mostFreqSec = faulknerStats.getMostFrequentWordsFromSection(kNumFreqWordsSec, sectionName);
     for(size_t i = 0; i < mostFreqSec.size(); i++) {
       cout << "  " << mostFreqSec[i] << endl;
     }
+    cout << endl;
   }
-  cout << endl << endl;
+  cout << endl;
 
   cout << "Parts of Speech Analysis: " << endl << endl;
   cout << "Total number of nouns: " << faulknerStats.getTotalNumPartOfSpeech(noun) << endl;

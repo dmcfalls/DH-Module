@@ -1,6 +1,6 @@
 /* File: dh.cc
  * Author: Dan McFalls (dmcfalls@stanford.edu)
- * -----------
+ * -------------------------------------------
  * This class is a framework of analyzing a digital text of a literary work.
  * Objects are initialized around a filename of a primary text, and they can
  * be queried for various information about the text.
@@ -32,9 +32,13 @@ const string kAdjectivesPath = "adjectives.txt";
 const string kAdverbsPath = "adverbs.txt";
 const string kPartsOfSpeechFilenames[kNumPartsOfSpeech] = {kNounsPath, kVerbsPath, kAdjectivesPath, kAdverbsPath};
 
+const vector<string> kWordsWithPeriods {"mr.", "ms.", "mrs.", "dr.", "etc.", "n.b.", "e.g.", "i.e.", "a.m.", "p.m."};
+const set<string> wordsWithPeriods(kWordsWithPeriods.begin(), kWordsWithPeriods.end());
+
 /* Default Constructor */
 DHModule::DHModule() {
   wordCount = 0;
+  sentenceCount = 0;
   totalChars = 0;
   populatePartsOfSpeechSets();
 }
@@ -42,6 +46,7 @@ DHModule::DHModule() {
 /* Constructor */
 DHModule::DHModule(const string& filename) {
   wordCount = 0;
+  sentenceCount = 0;
   totalChars = 0;
   populatePartsOfSpeechSets();
   readTextFromFilename(filename);
@@ -62,6 +67,7 @@ void DHModule::readTextFromFilename(const string& filename) {
   initializePartsOfSpeechMap(headerName);
 
   //Process text on a line-by-line basis, which will allow processing at the paragraph level
+  int currSentenceLength = 1;
   while(getline(textFile, line)) {
     stringstream lineStream;
     lineStream << line;
@@ -71,6 +77,14 @@ void DHModule::readTextFromFilename(const string& filename) {
         headerName = word.substr(kSectionHeaderLen);
         initializePartsOfSpeechMap(headerName);
         continue;
+      }
+
+      //Check if this word marks the end of a sentence, and record the sentence length if so.
+      if(endsSentence(word)) {
+        sectionDataModules[headerName].sentenceLengths[currSentenceLength]++;
+        sectionDataModules[headerName].sentenceCount++;
+        sentenceCount++;
+        currSentenceLength = 1;
       }
 
       //Clean up the input string
@@ -97,7 +111,13 @@ void DHModule::readTextFromFilename(const string& filename) {
       //Increment the appropriate part of speech count for the given word
       part_of_speech_t pos = partOfSpeechOf(word);
       sectionDataModules[headerName].wordPosKinds[pos]++;
+      currSentenceLength++;
     }
+    //End of line denotes end of sentence
+    sectionDataModules[headerName].sentenceLengths[currSentenceLength]++;
+    sectionDataModules[headerName].sentenceCount++;
+    sentenceCount++;
+    currSentenceLength = 1;
   }
   //Build word frequecy map (which is sorted with freq:word as key:value pairing)
   for(auto it = uniqueWords.begin(); it != uniqueWords.end(); it++) {
@@ -123,6 +143,10 @@ int DHModule::getWordCount() {
 /* Returns the number of unique words used in the text */
 int DHModule::getUniqueWordCount() {
   return uniqueWords.size();
+}
+
+int DHModule::getSentenceCount() {
+  return sentenceCount;
 }
 
 /* Returns all section names (these are usually hard-coded by the user */
@@ -178,8 +202,15 @@ float DHModule::getAverageWordLengthFromSection(const string& sectionName) {
 }
 
 float DHModule::getAverageSentenceLengthFromSection(const string& sectionName) {
-  //TODO: implement
-  return 0.0;
+  int sentencesInSection = 0;
+  int wordsInSection = 0;
+  auto section = sectionDataModules.find(sectionName);
+  if(section == sectionDataModules.end()) throw ("Error: incorrect sectionName passed to getAverageSentenceLengthFromSection");
+  for(auto kv = section->second.sentenceLengths.begin(); kv != section->second.sentenceLengths.end(); kv++) {
+    sentencesInSection += kv->second;
+    wordsInSection += kv->second * kv->first;
+  }
+  return (float)wordsInSection / sentencesInSection;
 }
 
 /* Returns the n most frequently used words in the text where n = numResults */
@@ -282,4 +313,9 @@ part_of_speech_t DHModule::partOfSpeechOf(string& word) {
 /* Returns true if the given word is a special string to mark the beginning of a section */
 bool DHModule::isSectionMarker(string& word) {
   return (word.length() >= kSectionHeaderLen) && (word.substr(0, kSectionHeaderLen) == kSectionHeader);
+}
+
+/* Returns true if the given word is suspected to end a sentence, false otherwise */
+bool DHModule::endsSentence(string& word) {
+  return !(wordsWithPeriods.find(word) == wordsWithPeriods.end());
 }
