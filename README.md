@@ -11,13 +11,13 @@ Some of the module's current capabilities include:
 <ul>
   <li>Word frequencies</li>
   <li>Average word length</li>
+  <li>Average sentence length</li>
   <li>Part-of-speech analysis</li>
   <li>Section-specific analysis</li>
 </ul>
 
 Things I'm hoping to add/change as I continue to develop:
 <ul>
-  <li>Sentence level processing</li>
   <li>Paragraph level processing</li>
   <li>Option to query on n-grams in text-level and section-level</li>
 </ul>
